@@ -1,0 +1,52 @@
+version: '3'
+volumes:
+  composer:
+  mysql-data:
+
+services:
+
+  php-apache:
+    build:
+      context: ${PWD}/docker/
+      dockerfile: php-apache.docker
+    ports:
+      - 81:80
+    volumes:
+      - ${PWD}/:/var/www/app
+
+  mysql:
+    build:
+      context: ${PWD}/docker/
+      dockerfile: mysql.docker
+    restart: always
+    ports:
+      - 36060:3606
+    environment:
+      MYSQL_DATABASE: orm
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_USER: ali
+      MYSQL_PASS: 12345
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 85:80
+    environment:
+      PMA_PORT: 36060
+      MYSQL_ROOT_PASSWORD: 12345
+    links: 
+      - mysql:db
+    depends_on:
+      - mysql
+
+  php-cli:
+    build:
+      context: ${PWD}/docker/
+      dockerfile: php-cli.docker
+    volumes:
+      - ${PWD}/:/var/www/app
+
+
+
