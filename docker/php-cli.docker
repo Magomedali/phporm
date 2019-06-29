@@ -18,7 +18,3 @@ VOLUME ["composer","/root/.composer/cache"]
 
 RUN git config --global user.name "web-ali" && \
 	git config --global user.email "web-ali@yandex.ru"
-
-	
-
-WORKDIR /app

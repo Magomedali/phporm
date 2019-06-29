@@ -1,0 +1,13 @@
+{
+    "name": "alico/phporm",
+    "description": "Simply orm library",
+    "type": "library",
+    "authors": [
+        {
+            "name": "alico",
+            "email": "web-ali@yandex.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
